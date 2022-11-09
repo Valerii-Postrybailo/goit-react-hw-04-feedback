@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import css from './FeedbackOptions.module.css';
 
 function FeedbackOptions({ options, onLeaveFeedback }) {
+  console.log(options)
   return (
     <ul className={css.ul}>
       {Object.keys(options).map(key => 
