@@ -8,6 +8,7 @@ import Notification from './Notification/Notification'
 
 export const App = () => {
 
+  // const [state, setState] = useState([])
   const [good, setGoodVote] = useState(0)
   const [neutral, setNeutralVote] = useState(0)
   const [bad, setBadVote] = useState(0)
@@ -19,26 +20,23 @@ export const App = () => {
   }
 
   const onLeaveFeedback = evt => {
-    console.log(evt)
-    const {good, neutral, bad} = evt
-
     switch(evt){
-      case good:
+      case "good":
         setGoodVote(good + 1)
       break
       
-      case neutral:
+      case "neutral":
         setNeutralVote(neutral + 1)
       break
 
-      case bad:
+      case "bad":
         setBadVote(bad + 1)
       break
 
       default:
         return
     }
-
+    
     // this.setState(prevState => ({
     //   [evt]: prevState[evt] + 1,
     // }));
@@ -46,14 +44,12 @@ export const App = () => {
   };
 
   const countTotalFeedback = () => {
-    console.log(bad + good + neutral)
     return bad + good + neutral
   }
 
   const countPositiveFeedbackPercentage = () => {
     return Number((good * 100/countTotalFeedback()).toFixed())
   }
-
   
     return(
 
@@ -79,14 +75,14 @@ export const App = () => {
       </Section>
 
       <Section title="Statistics">
-        {countTotalFeedback() < 1 ? (
+        {bad + good + neutral < 1 ? (
           <Notification message = "There is no feedback" />
         ) : (
           <Statistics 
             good={good}
             neutral={neutral} 
             bad={bad} 
-            total={countTotalFeedback()} 
+            total={bad + good + neutral} 
             positivePercentage={countPositiveFeedbackPercentage()}>
           </Statistics>
         )}
